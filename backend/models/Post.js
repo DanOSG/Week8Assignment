@@ -1,7 +1,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/config');
+const User = require('./User');
 
-const Blog = sequelize.define('Blog', {
+const Post = sequelize.define('Post', {
   title: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -16,4 +17,7 @@ const Blog = sequelize.define('Blog', {
   },
 });
 
-module.exports = Blog;
+User.hasMany(Post);
+Post.belongsTo(User);
+
+module.exports = Post;

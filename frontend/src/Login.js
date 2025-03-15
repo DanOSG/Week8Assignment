@@ -12,8 +12,9 @@ const Login = ({ setToken }) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:3001/api/auth/login', formData);
-      setToken(response.data.token);
-      alert('Login successful');
+      const token = response.data.token;
+      setToken(token);
+      setFormData({ email: '', password: '' }); // Clear form
     } catch (error) {
       alert('Login failed');
     }
@@ -21,8 +22,20 @@ const Login = ({ setToken }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="email" name="email" placeholder="Email" onChange={handleChange} />
-      <input type="password" name="password" placeholder="Password" onChange={handleChange} />
+      <input 
+        type="email" 
+        name="email" 
+        placeholder="Email" 
+        value={formData.email}
+        onChange={handleChange} 
+      />
+      <input 
+        type="password" 
+        name="password" 
+        placeholder="Password" 
+        value={formData.password}
+        onChange={handleChange} 
+      />
       <button type="submit">Login</button>
     </form>
   );

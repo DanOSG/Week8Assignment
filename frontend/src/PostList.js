@@ -10,6 +10,8 @@ import "react-mde/lib/styles/css/react-mde-all.css";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
 const CATEGORIES = [
   'Technology',
   'Lifestyle',
@@ -41,7 +43,7 @@ const PostList = ({ token, onDeletePost }) => {
 
   useEffect(() => {
     // Connect to chat
-    const newSocket = io('http://localhost:3001');
+    const newSocket = io(API_URL);
     setSocket(newSocket);
 
     // Clean up when leaving
@@ -100,7 +102,7 @@ const PostList = ({ token, onDeletePost }) => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3001/api/posts' + (selectedCategory ? `?category=${selectedCategory}` : ''),
+          `${API_URL}/api/posts` + (selectedCategory ? `?category=${selectedCategory}` : ''),
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setPosts(response.data);
@@ -122,7 +124,7 @@ const PostList = ({ token, onDeletePost }) => {
   const fetchLikeStatus = async (postId) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/posts/${postId}/like`,
+        `${API_URL}/api/posts/${postId}/like`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setPosts(prevPosts =>
@@ -140,7 +142,7 @@ const PostList = ({ token, onDeletePost }) => {
   const fetchComments = async (postId) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/posts/${postId}/comments`,
+        `${API_URL}/api/posts/${postId}/comments`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setComments(prev => ({
@@ -155,7 +157,7 @@ const PostList = ({ token, onDeletePost }) => {
   const handleLike = async (postId, type) => {
     try {
       await axios.post(
-        `http://localhost:3001/api/posts/${postId}/like`,
+        `${API_URL}/api/posts/${postId}/like`,
         { type },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -168,7 +170,7 @@ const PostList = ({ token, onDeletePost }) => {
   const handleComment = async (postId) => {
     try {
       await axios.post(
-        `http://localhost:3001/api/posts/${postId}/comments`,
+        `${API_URL}/api/posts/${postId}/comments`,
         { content: newComment[postId] },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -182,7 +184,7 @@ const PostList = ({ token, onDeletePost }) => {
   const handleDeleteComment = async (postId, commentId) => {
     try {
       await axios.delete(
-        `http://localhost:3001/api/posts/${postId}/comments/${commentId}`,
+        `${API_URL}/api/posts/${postId}/comments/${commentId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       fetchComments(postId);
@@ -205,7 +207,7 @@ const PostList = ({ token, onDeletePost }) => {
   const handleSaveEdit = async (post) => {
     try {
       await axios.put(
-        `http://localhost:3001/api/posts/${post.id}`,
+        `${API_URL}/api/posts/${post.id}`,
         {
           title: post.title,
           content: post.content,

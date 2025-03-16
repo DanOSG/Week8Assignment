@@ -300,3 +300,50 @@ input:focus, textarea:focus, select:focus {
   border-color: var(--primary) !important;
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3) !important;
 }
+
+/* Fix for markdown editor text input */
+.w-md-editor-text-input {
+  color: var(--text) !important;
+  background-color: transparent !important;
+}
+
+.w-md-editor-text-pre {
+  color: var(--text) !important;
+}
+
+.w-md-editor-text-pre > code {
+  color: var(--text) !important;
+  background-color: transparent !important;
+}
+
+/* Ensure textarea has proper contrast */
+textarea {
+  color: var(--text) !important;
+  background-color: var(--input-bg) !important;
+}
+
+[data-theme="dark"] textarea {
+  background-color: #2d3a4f !important;
+  color: var(--text) !important;
+}
+
+/* Fix for MDEditor in dark mode */
+[data-theme="dark"] .w-md-editor {
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .w-md-editor-text {
+  background-color: #2d3a4f !important;
+}
+
+[data-theme="dark"] .w-md-editor-text-pre,
+[data-theme="dark"] .w-md-editor-text-input {
+  color: #f1f5f9 !important;
+}
+
+/* Fix for MDEditor in light mode */
+[data-theme="light"] .w-md-editor-text-pre,
+[data-theme="light"] .w-md-editor-text-input {
+  color: #1f2937 !important;
+}

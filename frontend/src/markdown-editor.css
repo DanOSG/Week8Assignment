@@ -1,0 +1,92 @@
+/* Markdown Editor Styles */
+.w-md-editor {
+  border: 1px solid var(--border) !important;
+  background-color: var(--input-bg) !important;
+}
+
+.w-md-editor-toolbar {
+  border-bottom: 1px solid var(--border) !important;
+  background-color: var(--background-secondary) !important;
+}
+
+.w-md-editor-text {
+  color: var(--text) !important;
+}
+
+.w-md-editor-text-input {
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+  color: var(--text) !important;
+  background-color: transparent !important;
+}
+
+.w-md-editor-text-pre {
+  color: var(--text) !important;
+}
+
+.w-md-editor-text-pre > code {
+  color: var(--text) !important;
+  background-color: transparent !important;
+}
+
+/* Dark mode specific fixes */
+[data-theme="dark"] .w-md-editor {
+  border-color: var(--border) !important;
+  background-color: #1e293b !important;
+}
+
+[data-theme="dark"] .w-md-editor-toolbar {
+  background-color: #2d3a4f !important;
+  border-color: var(--border) !important;
+}
+
+[data-theme="dark"] .w-md-editor-text {
+  background-color: #2d3a4f !important;
+}
+
+[data-theme="dark"] .w-md-editor-text-input,
+[data-theme="dark"] .w-md-editor-text-pre,
+[data-theme="dark"] .w-md-editor-text-pre > code {
+  color: #f1f5f9 !important;
+}
+
+/* Light mode specific fixes */
+[data-theme="light"] .w-md-editor {
+  border-color: var(--border) !important;
+  background-color: #ffffff !important;
+}
+
+[data-theme="light"] .w-md-editor-toolbar {
+  background-color: #f3f4f6 !important;
+}
+
+[data-theme="light"] .w-md-editor-text {
+  background-color: #ffffff !important;
+}
+
+[data-theme="light"] .w-md-editor-text-input,
+[data-theme="light"] .w-md-editor-text-pre,
+[data-theme="light"] .w-md-editor-text-pre > code {
+  color: #1f2937 !important;
+}
+
+/* Ensure textarea has proper contrast */
+textarea {
+  color: var(--text) !important;
+  background-color: var(--input-bg) !important;
+}
+
+[data-theme="dark"] textarea {
+  background-color: #2d3a4f !important;
+  color: #f1f5f9 !important;
+}
+
+/* Fix for markdown preview */
+.wmde-markdown {
+  background-color: var(--card) !important;
+  color: var(--text) !important;
+}
+
+.wmde-markdown-color {
+  color: var(--text) !important;
+} 

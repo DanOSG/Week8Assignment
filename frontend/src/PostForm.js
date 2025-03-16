@@ -59,6 +59,16 @@ const PostForm = ({ token }) => {
           value={formData.content}
           onChange={handleContentChange}
           preview="edit"
+          style={{ 
+            color: 'var(--text)',
+            backgroundColor: 'var(--input-bg)'
+          }}
+          textareaProps={{
+            style: {
+              color: 'var(--text)',
+              backgroundColor: 'transparent'
+            }
+          }}
         />
       </div>
       <div className="form-group">

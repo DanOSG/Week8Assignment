@@ -109,7 +109,7 @@ const Comments = ({ postId, token, socket }) => {
         {comments.map((comment) => (
           <div key={comment._id} className="comment">
             <div className="comment-header">
-              <span className="comment-author">{comment.authorName}</span>
+              <span className="comment-author">{comment.User ? comment.User.username : 'Unknown'}</span>
               <span className="comment-date">
                 {new Date(comment.createdAt).toLocaleDateString()}
               </span>

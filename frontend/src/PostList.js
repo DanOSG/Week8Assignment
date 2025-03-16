@@ -273,6 +273,16 @@ const PostList = ({ token, onDeletePost }) => {
                   value={editingPost.content}
                   onChange={handleContentChange}
                   preview="edit"
+                  style={{ 
+                    color: 'var(--text)',
+                    backgroundColor: 'var(--input-bg)'
+                  }}
+                  textareaProps={{
+                    style: {
+                      color: 'var(--text)',
+                      backgroundColor: 'transparent'
+                    }
+                  }}
                 />
                 <div className="button-group">
                   <button onClick={() => handleSaveEdit(editingPost)} className="save-button">
@@ -303,7 +313,7 @@ const PostList = ({ token, onDeletePost }) => {
                     <BiCategory /> {post.category}
                   </span>
                   <span className="post-author">
-                    <FaUser /> {post.authorName}
+                    <FaUser /> {post.User ? post.User.username : 'Unknown'}
                   </span>
                 </div>
                 <div className="post-content">
@@ -331,7 +341,7 @@ const PostList = ({ token, onDeletePost }) => {
                       {comments[post.id]?.map(comment => (
                         <div key={comment.id} className="comment">
                           <div className="comment-header">
-                            <span className="comment-author">{comment.authorName}</span>
+                            <span className="comment-author">{comment.User ? comment.User.username : 'Unknown'}</span>
                             {currentUserId === comment.userId && (
                               <button
                                 onClick={() => handleDeleteComment(post.id, comment.id)}

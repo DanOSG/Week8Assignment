@@ -14,8 +14,8 @@ const Login = ({ setToken }) => {
     e.preventDefault();
     try {
       const response = await axios.post(`${API_URL}/api/auth/login`, formData);
-      const token = response.data.token;
-      setToken(token);
+      const { token, username } = response.data;
+      setToken(token, username);
       setFormData({ email: '', password: '' }); // Clear form
     } catch (error) {
       alert('Login failed');

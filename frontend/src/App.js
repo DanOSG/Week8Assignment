@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import './markdown-editor.css';
 import Register from './Register';
 import Login from './Login';
 import PostForm from './PostForm';

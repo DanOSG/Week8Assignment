@@ -204,6 +204,16 @@ const Post = ({ post, onDelete, token, socket }) => {
             value={editedContent}
             onChange={setEditedContent}
             preview="edit"
+            style={{ 
+              color: 'var(--text)',
+              backgroundColor: 'var(--input-bg)'
+            }}
+            textareaProps={{
+              style: {
+                color: 'var(--text)',
+                backgroundColor: 'transparent'
+              }
+            }}
           />
           <div className="button-group">
             <button onClick={handleSave}>Save</button>
@@ -218,7 +228,7 @@ const Post = ({ post, onDelete, token, socket }) => {
               <FiMessageSquare /> {post.category}
             </span>
             <span className="post-author">
-              By {post.authorName}
+              By {post.User ? post.User.username : 'Unknown'}
             </span>
           </div>
           <div className="post-content">

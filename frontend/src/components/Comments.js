@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { FiSend, FiTrash2 } from 'react-icons/fi';
 import jwt_decode from 'jwt-decode';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://week8assignment-wt6d.onrender.com';
+
 const Comments = ({ postId, token, socket }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
@@ -41,7 +43,7 @@ const Comments = ({ postId, token, socket }) => {
 
   const fetchComments = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/posts/${postId}/comments`);
+      const response = await fetch(`${API_URL}/api/posts/${postId}/comments`);
       const data = await response.json();
       setComments(data);
     } catch (error) {
@@ -54,7 +56,7 @@ const Comments = ({ postId, token, socket }) => {
     if (!newComment.trim()) return;
 
     try {
-      const response = await fetch(`http://localhost:3001/api/posts/${postId}/comments`, {
+      const response = await fetch(`${API_URL}/api/posts/${postId}/comments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,7 +75,7 @@ const Comments = ({ postId, token, socket }) => {
 
   const handleDelete = async (commentId) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/posts/${postId}/comments/${commentId}`, {
+      const response = await fetch(`${API_URL}/api/posts/${postId}/comments/${commentId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

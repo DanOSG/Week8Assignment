@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://week8assignment-wt6d.onrender.com';
+
 const Login = ({ setToken }) => {
   const [formData, setFormData] = useState({ email: '', password: '' });
 
@@ -11,7 +13,7 @@ const Login = ({ setToken }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/api/auth/login', formData);
+      const response = await axios.post(`${API_URL}/api/auth/login`, formData);
       const token = response.data.token;
       setToken(token);
       setFormData({ email: '', password: '' }); // Clear form

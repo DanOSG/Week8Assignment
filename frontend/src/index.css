@@ -259,3 +259,44 @@ button:hover {
 .wmde-markdown-color {
   color: var(--text) !important;
 }
+
+/* Additional fixes for the markdown editor in dark mode */
+[data-theme="dark"] .w-md-editor {
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .w-md-editor-text {
+  background-color: #2d3a4f !important;
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .w-md-editor-toolbar {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+[data-theme="dark"] .w-md-editor-toolbar ul li button {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .w-md-editor-toolbar ul li button:hover {
+  background-color: #334155 !important;
+}
+
+[data-theme="dark"] .w-md-editor-toolbar ul li.active button {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+/* Fix for input and textarea in both themes */
+input, textarea, select {
+  background-color: var(--input-bg) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3) !important;
+}

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import ReactMde from 'react-mde';
-import "react-mde/lib/styles/css/react-mde-all.css";
+import MDEditor from '@uiw/react-md-editor';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -19,7 +18,6 @@ const PostForm = ({ token }) => {
     content: '', 
     category: CATEGORIES[0] // Default to first category
   });
-  const [selectedTab, setSelectedTab] = useState("write");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,14 +25,6 @@ const PostForm = ({ token }) => {
 
   const handleContentChange = (value) => {
     setFormData({ ...formData, content: value });
-  };
-
-  const generateMarkdownPreview = (markdown) => {
-    return Promise.resolve(
-      <div className="mde-preview-content">
-        <ReactMarkdown>{markdown || ''}</ReactMarkdown>
-      </div>
-    );
   };
 
   const handleSubmit = async (e) => {
@@ -45,7 +35,6 @@ const PostForm = ({ token }) => {
       });
       // Clear form after successful submission
       setFormData({ title: '', content: '', category: CATEGORIES[0] });
-      setSelectedTab("write");
       window.location.reload(); // Refresh to show new post
     } catch (error) {
       alert('Post creation failed');
@@ -64,12 +53,10 @@ const PostForm = ({ token }) => {
         />
       </div>
       <div className="form-group">
-        <ReactMde
+        <MDEditor
           value={formData.content}
           onChange={handleContentChange}
-          selectedTab={selectedTab}
-          onTabChange={setSelectedTab}
-          generateMarkdownPreview={generateMarkdownPreview}
+          preview="edit"
         />
       </div>
       <div className="form-group">

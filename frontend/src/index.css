@@ -75,3 +75,187 @@ button:hover {
   font-size: 14px;
   color: #007bff;
 }
+
+/* Markdown Editor Styles */
+.w-md-editor {
+  --md-editor-bg-color: var(--background);
+  --md-editor-text-color: var(--text);
+  --md-editor-border-color: var(--border);
+  --md-editor-toolbar-bg-color: var(--background-light);
+  --md-editor-toolbar-hover-bg-color: var(--background-hover);
+  --md-editor-toolbar-active-bg-color: var(--primary);
+  --md-editor-toolbar-color: var(--text);
+  --md-editor-toolbar-hover-color: var(--text-hover);
+  --md-editor-toolbar-active-color: white;
+  --md-editor-preview-bg-color: var(--background);
+  --md-editor-preview-text-color: var(--text);
+  --md-editor-preview-border-color: var(--border);
+  --md-editor-preview-heading-color: var(--primary);
+  --md-editor-preview-link-color: var(--primary);
+  --md-editor-preview-code-bg-color: var(--background-light);
+  --md-editor-preview-code-color: var(--text);
+  --md-editor-preview-blockquote-bg-color: var(--background-light);
+  --md-editor-preview-blockquote-color: var(--text-secondary);
+  --md-editor-preview-blockquote-border-color: var(--primary);
+  --md-editor-preview-table-border-color: var(--border);
+  --md-editor-preview-table-header-bg-color: var(--background-light);
+  --md-editor-preview-table-header-color: var(--text);
+  --md-editor-preview-table-cell-bg-color: var(--background);
+  --md-editor-preview-table-cell-color: var(--text);
+  --md-editor-preview-hr-color: var(--border);
+  --md-editor-preview-list-color: var(--text);
+  --md-editor-preview-list-marker-color: var(--primary);
+  --md-editor-preview-image-border-color: var(--border);
+  --md-editor-preview-image-bg-color: var(--background-light);
+  --md-editor-preview-image-color: var(--text);
+  --md-editor-preview-image-caption-color: var(--text-secondary);
+  --md-editor-preview-image-caption-bg-color: var(--background-light);
+  --md-editor-preview-image-caption-border-color: var(--border);
+  --md-editor-preview-image-caption-padding: 0.5rem;
+  --md-editor-preview-image-caption-margin: 0.5rem 0;
+  --md-editor-preview-image-caption-font-size: 0.875rem;
+  --md-editor-preview-image-caption-font-style: italic;
+  --md-editor-preview-image-caption-text-align: center;
+  --md-editor-preview-image-caption-line-height: 1.5;
+  --md-editor-preview-image-caption-letter-spacing: 0.025em;
+  --md-editor-preview-image-caption-text-transform: none;
+  --md-editor-preview-image-caption-text-decoration: none;
+  --md-editor-preview-image-caption-text-shadow: none;
+  --md-editor-preview-image-caption-box-shadow: none;
+  --md-editor-preview-image-caption-border-radius: 0;
+  --md-editor-preview-image-caption-opacity: 1;
+  --md-editor-preview-image-caption-transition: none;
+  --md-editor-preview-image-caption-transform: none;
+  --md-editor-preview-image-caption-animation: none;
+  --md-editor-preview-image-caption-filter: none;
+  --md-editor-preview-image-caption-backdrop-filter: none;
+  --md-editor-preview-image-caption-mix-blend-mode: normal;
+  --md-editor-preview-image-caption-clip-path: none;
+  --md-editor-preview-image-caption-mask: none;
+  --md-editor-preview-image-caption-pointer-events: auto;
+  --md-editor-preview-image-caption-user-select: text;
+  --md-editor-preview-image-caption-touch-action: auto;
+  --md-editor-preview-image-caption-will-change: auto;
+  --md-editor-preview-image-caption-z-index: auto;
+  --md-editor-preview-image-caption-overflow: visible;
+  --md-editor-preview-image-caption-white-space: normal;
+  --md-editor-preview-image-caption-word-break: normal;
+  --md-editor-preview-image-caption-word-wrap: normal;
+  --md-editor-preview-image-caption-hyphens: manual;
+  --md-editor-preview-image-caption-quotes: auto;
+  --md-editor-preview-image-caption-tab-size: 4;
+  --md-editor-preview-image-caption-content: normal;
+  --md-editor-preview-image-caption-counter-increment: none;
+  --md-editor-preview-image-caption-counter-reset: none;
+  --md-editor-preview-image-caption-resize: none;
+  --md-editor-preview-image-caption-cursor: auto;
+  --md-editor-preview-image-caption-outline: none;
+  --md-editor-preview-image-caption-outline-offset: 0;
+  --md-editor-preview-image-caption-grid: none;
+  --md-editor-preview-image-caption-place-content: normal;
+  --md-editor-preview-image-caption-place-items: normal;
+  --md-editor-preview-image-caption-place-self: auto;
+  --md-editor-preview-image-caption-justify-content: normal;
+  --md-editor-preview-image-caption-justify-items: normal;
+  --md-editor-preview-image-caption-justify-self: auto;
+  --md-editor-preview-image-caption-align-content: normal;
+  --md-editor-preview-image-caption-align-items: normal;
+  --md-editor-preview-image-caption-align-self: auto;
+  --md-editor-preview-image-caption-order: 0;
+  --md-editor-preview-image-caption-flex: none;
+  --md-editor-preview-image-caption-flex-flow: row nowrap;
+  --md-editor-preview-image-caption-flex-direction: row;
+  --md-editor-preview-image-caption-flex-wrap: nowrap;
+  --md-editor-preview-image-caption-flex-grow: 0;
+  --md-editor-preview-image-caption-flex-shrink: 1;
+  --md-editor-preview-image-caption-flex-basis: auto;
+}
+
+.w-md-editor-toolbar {
+  background-color: var(--background-light) !important;
+  border-color: var(--border) !important;
+}
+
+.w-md-editor-toolbar ul li button {
+  color: var(--text) !important;
+}
+
+.w-md-editor-toolbar ul li button:hover {
+  background-color: var(--background-hover) !important;
+  color: var(--text-hover) !important;
+}
+
+.w-md-editor-toolbar ul li.active button {
+  background-color: var(--primary) !important;
+  color: white !important;
+}
+
+.w-md-editor-text {
+  color: var(--text) !important;
+  background-color: var(--background) !important;
+}
+
+.w-md-editor-preview {
+  background-color: var(--background) !important;
+  color: var(--text) !important;
+}
+
+.wmde-markdown {
+  background-color: var(--background) !important;
+  color: var(--text) !important;
+}
+
+.wmde-markdown h1,
+.wmde-markdown h2,
+.wmde-markdown h3,
+.wmde-markdown h4,
+.wmde-markdown h5,
+.wmde-markdown h6 {
+  color: var(--primary) !important;
+}
+
+.wmde-markdown a {
+  color: var(--primary) !important;
+}
+
+.wmde-markdown code {
+  background-color: var(--background-light) !important;
+  color: var(--text) !important;
+}
+
+.wmde-markdown pre {
+  background-color: var(--background-light) !important;
+}
+
+.wmde-markdown blockquote {
+  border-left-color: var(--primary) !important;
+  background-color: var(--background-light) !important;
+  color: var(--text-secondary) !important;
+}
+
+.wmde-markdown table {
+  border-color: var(--border) !important;
+}
+
+.wmde-markdown th {
+  background-color: var(--background-light) !important;
+  color: var(--text) !important;
+}
+
+.wmde-markdown td {
+  background-color: var(--background) !important;
+  color: var(--text) !important;
+}
+
+.wmde-markdown hr {
+  background-color: var(--border) !important;
+}
+
+.wmde-markdown ul,
+.wmde-markdown ol {
+  color: var(--text) !important;
+}
+
+.wmde-markdown-color {
+  color: var(--text) !important;
+}

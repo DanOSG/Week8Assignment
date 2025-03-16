@@ -5,8 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import { FiEdit2, FiTrash2, FiSave, FiX, FiThumbsUp, FiThumbsDown, FiMessageSquare } from 'react-icons/fi';
 import { BiCategory } from 'react-icons/bi';
 import { FaUser } from 'react-icons/fa';
-import ReactMde from 'react-mde';
-import "react-mde/lib/styles/css/react-mde-all.css";
+import MDEditor from '@uiw/react-md-editor';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -229,12 +228,11 @@ const PostList = ({ token, onDeletePost }) => {
     });
   };
 
-  const generateMarkdownPreview = (markdown) => {
-    return Promise.resolve(
-      <div className="mde-preview-content">
-        <ReactMarkdown>{markdown || ''}</ReactMarkdown>
-      </div>
-    );
+  const handleContentChange = (value) => {
+    setEditingPost({
+      ...editingPost,
+      content: value
+    });
   };
 
   return (
@@ -253,22 +251,14 @@ const PostList = ({ token, onDeletePost }) => {
       </div>
       <div className="posts-container">
         {posts.map((post) => (
-          <div key={post.id} className="post">
+          <div key={post.id} className="post-card">
             {editingPost && editingPost.id === post.id ? (
               <div className="edit-form">
                 <input
                   type="text"
                   value={editingPost.title}
                   onChange={(e) => handleInputChange(e, 'title')}
-                  className="edit-input"
-                  placeholder="Post title"
-                />
-                <ReactMde
-                  value={editingPost.content}
-                  onChange={(value) => handleInputChange({ target: { value } }, 'content')}
-                  selectedTab="write"
-                  onTabChange={() => {}}
-                  generateMarkdownPreview={generateMarkdownPreview}
+                  className="edit-title"
                 />
                 <select
                   value={editingPost.category}
@@ -279,9 +269,14 @@ const PostList = ({ token, onDeletePost }) => {
                     <option key={category} value={category}>{category}</option>
                   ))}
                 </select>
-                <div className="edit-controls">
+                <MDEditor
+                  value={editingPost.content}
+                  onChange={handleContentChange}
+                  preview="edit"
+                />
+                <div className="button-group">
                   <button onClick={() => handleSaveEdit(editingPost)} className="save-button">
-                    <FiSave /> Save Changes
+                    <FiSave /> Save
                   </button>
                   <button onClick={handleCancelEdit} className="cancel-button">
                     <FiX /> Cancel
@@ -290,50 +285,55 @@ const PostList = ({ token, onDeletePost }) => {
               </div>
             ) : (
               <>
-                <h2>{post.title}</h2>
+                <div className="post-header">
+                  <h2>{post.title}</h2>
+                  {currentUserId === post.userId && (
+                    <div className="post-actions">
+                      <button onClick={() => handleEdit(post)} className="edit-button">
+                        <FiEdit2 />
+                      </button>
+                      <button onClick={() => onDeletePost(post.id)} className="delete-button">
+                        <FiTrash2 />
+                      </button>
+                    </div>
+                  )}
+                </div>
                 <div className="post-meta">
-                  <p className="post-category">
+                  <span className="post-category">
                     <BiCategory /> {post.category}
-                  </p>
-                  <p className="post-author">
-                    <FaUser /> {post.User?.username || 'Unknown'}
-                  </p>
+                  </span>
+                  <span className="post-author">
+                    <FaUser /> {post.authorName}
+                  </span>
                 </div>
-                <div className="post-content markdown-content">
-                  <ReactMarkdown>{post.content || ''}</ReactMarkdown>
+                <div className="post-content">
+                  <MDEditor.Markdown source={post.content} />
                 </div>
-                <div className="post-interactions">
-                  <button onClick={() => handleLike(post.id, 'like')} className="like-button">
-                    <FiThumbsUp /> {post.likes || 0}
-                  </button>
-                  <button onClick={() => handleLike(post.id, 'dislike')} className="dislike-button">
-                    <FiThumbsDown /> {post.dislikes || 0}
-                  </button>
-                  <button 
+                <div className="post-footer">
+                  <div className="post-reactions">
+                    <button onClick={() => handleLike(post.id, 'like')} className="like-button">
+                      <FiThumbsUp /> {post.likes || 0}
+                    </button>
+                    <button onClick={() => handleLike(post.id, 'dislike')} className="dislike-button">
+                      <FiThumbsDown /> {post.dislikes || 0}
+                    </button>
+                  </div>
+                  <button
                     onClick={() => setShowComments(prev => ({ ...prev, [post.id]: !prev[post.id] }))}
-                    className="comment-button"
+                    className="comments-toggle"
                   >
-                    <FiMessageSquare /> {comments[post.id]?.length || 0}
+                    <FiMessageSquare /> {comments[post.id]?.length || 0} Comments
                   </button>
                 </div>
                 {showComments[post.id] && (
                   <div className="comments-section">
-                    <div className="comment-form">
-                      <textarea
-                        value={newComment[post.id] || ''}
-                        onChange={(e) => setNewComment(prev => ({ ...prev, [post.id]: e.target.value }))}
-                        placeholder="Write a comment..."
-                      />
-                      <button onClick={() => handleComment(post.id)}>Post Comment</button>
-                    </div>
                     <div className="comments-list">
                       {comments[post.id]?.map(comment => (
                         <div key={comment.id} className="comment">
-                          <p>{comment.content}</p>
-                          <div className="comment-meta">
-                            <span>{comment.User?.username || 'Unknown'}</span>
+                          <div className="comment-header">
+                            <span className="comment-author">{comment.authorName}</span>
                             {currentUserId === comment.userId && (
-                              <button 
+                              <button
                                 onClick={() => handleDeleteComment(post.id, comment.id)}
                                 className="delete-comment"
                               >
@@ -341,19 +341,18 @@ const PostList = ({ token, onDeletePost }) => {
                               </button>
                             )}
                           </div>
+                          <div className="comment-content">{comment.content}</div>
                         </div>
                       ))}
                     </div>
-                  </div>
-                )}
-                {currentUserId === post.userId && (
-                  <div className="post-controls">
-                    <button onClick={() => handleEdit(post)} className="edit-button">
-                      <FiEdit2 /> Edit Post
-                    </button>
-                    <button onClick={() => onDeletePost(post.id)} className="delete-button">
-                      <FiTrash2 /> Delete Post
-                    </button>
+                    <div className="add-comment">
+                      <textarea
+                        value={newComment[post.id] || ''}
+                        onChange={(e) => setNewComment(prev => ({ ...prev, [post.id]: e.target.value }))}
+                        placeholder="Add a comment..."
+                      />
+                      <button onClick={() => handleComment(post.id)}>Post</button>
+                    </div>
                   </div>
                 )}
               </>

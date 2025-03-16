@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FiThumbsUp, FiThumbsDown, FiMessageSquare, FiEdit2, FiTrash2, FiEye, FiEdit } from 'react-icons/fi';
 import Comments from './Comments';
 import jwt_decode from 'jwt-decode';
-import ReactMde from 'react-mde';
-import "react-mde/lib/styles/css/react-mde-all.css";
+import MDEditor from '@uiw/react-md-editor';
 
 const Post = ({ post, onDelete, token, socket }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -15,7 +14,6 @@ const Post = ({ post, onDelete, token, socket }) => {
   const [userDisliked, setUserDisliked] = useState(false);
   const [userId, setUserId] = useState(null);
   const [content, setContent] = useState(post.content);
-  const [selectedTab, setSelectedTab] = useState("write");
   const [editedTitle, setEditedTitle] = useState(post.title);
   const [editedCategory, setEditedCategory] = useState(post.category);
 
@@ -200,14 +198,10 @@ const Post = ({ post, onDelete, token, socket }) => {
             <option value="Food">Food</option>
             <option value="Lifestyle">Lifestyle</option>
           </select>
-          <ReactMde
+          <MDEditor
             value={editedContent}
             onChange={setEditedContent}
-            selectedTab={selectedTab}
-            onTabChange={setSelectedTab}
-            generateMarkdownPreview={(markdown) =>
-              Promise.resolve(<div className="mde-preview-content">{markdown}</div>)
-            }
+            preview="edit"
           />
           <div className="button-group">
             <button onClick={handleSave}>Save</button>
@@ -226,16 +220,7 @@ const Post = ({ post, onDelete, token, socket }) => {
             </span>
           </div>
           <div className="post-content">
-            <ReactMde
-              value={content}
-              selectedTab="preview"
-              onTabChange={() => {}}
-              generateMarkdownPreview={(markdown) =>
-                Promise.resolve(<div className="mde-preview-content">{markdown}</div>)
-              }
-              readOnly={true}
-              toolbarCommands={[]}
-            />
+            <MDEditor.Markdown source={content} />
           </div>
           <div className="post-actions">
             <div className="post-reactions">

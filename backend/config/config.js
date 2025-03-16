@@ -8,14 +8,12 @@ if (process.env.DATABASE_URL) {
   sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'mysql',
     dialectOptions: {
-      ssl: {
-        rejectUnauthorized: false,  // Allow self-signed certificates
-        require: true
-      }
+      // FreeSQLDatabase.com doesn't require SSL
+      ssl: false
     },
     logging: false,
     pool: {
-      max: 3,
+      max: 2, // FreeSQLDatabase has connection limits
       min: 0,
       acquire: 60000,
       idle: 10000

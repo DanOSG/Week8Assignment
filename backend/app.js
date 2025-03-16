@@ -53,23 +53,39 @@ const PORT = process.env.PORT || 3001;
 
 // Test database connection and sync models
 const startServer = async () => {
-  try {
-    // Test the connection
-    await sequelize.authenticate();
-    console.log('Database connection established successfully.');
+  let retries = 5;
+  
+  while (retries) {
+    try {
+      // Test the connection
+      await sequelize.authenticate();
+      console.log('Database connection established successfully.');
 
-    // Sync the models
-    await sequelize.sync({ alter: true });
-    console.log('Database models synchronized.');
+      // Sync the models
+      await sequelize.sync({ alter: true });
+      console.log('Database models synchronized.');
 
-    // Start the server
-    server.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
-  } catch (error) {
-    console.error('Unable to start the server:', error);
-    // Wait 5 seconds before exiting to allow logs to be captured
-    setTimeout(() => process.exit(1), 5000);
+      // Start the server
+      server.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+      });
+      
+      break; // Exit the loop if successful
+    } catch (error) {
+      console.error(`Unable to connect to the database (attempts left: ${retries}):`, error);
+      retries -= 1;
+      
+      if (retries === 0) {
+        console.error('Could not connect to database after multiple attempts. Starting server anyway...');
+        // Start the server even if database connection fails
+        server.listen(PORT, () => {
+          console.log(`Server is running on port ${PORT} (without database connection)`);
+        });
+      }
+      
+      // Wait before trying again
+      await new Promise(resolve => setTimeout(resolve, 5000));
+    }
   }
 };
 

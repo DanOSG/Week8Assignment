@@ -21,3 +21,6 @@ const User = sequelize.define('User', {
 });
 
 module.exports = User;
+
+
+{/*comment added to make the file name update*/}

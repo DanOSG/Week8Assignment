@@ -9,7 +9,8 @@ if (process.env.DATABASE_URL) {
     dialect: 'mysql',
     dialectOptions: {
       ssl: {
-        rejectUnauthorized: true
+        rejectUnauthorized: false,  // Allow self-signed certificates
+        require: true
       }
     },
     logging: false,

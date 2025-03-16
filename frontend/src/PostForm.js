@@ -66,7 +66,8 @@ const PostForm = ({ token }) => {
           textareaProps={{
             style: {
               color: 'var(--text)',
-              backgroundColor: 'transparent'
+              backgroundColor: 'transparent',
+              caretColor: 'var(--text)'
             }
           }}
         />

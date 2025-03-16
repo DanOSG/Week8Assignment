@@ -211,7 +211,8 @@ const Post = ({ post, onDelete, token, socket }) => {
             textareaProps={{
               style: {
                 color: 'var(--text)',
-                backgroundColor: 'transparent'
+                backgroundColor: 'transparent',
+                caretColor: 'var(--text)'
               }
             }}
           />

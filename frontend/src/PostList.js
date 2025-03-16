@@ -280,7 +280,8 @@ const PostList = ({ token, onDeletePost }) => {
                   textareaProps={{
                     style: {
                       color: 'var(--text)',
-                      backgroundColor: 'transparent'
+                      backgroundColor: 'transparent',
+                      caretColor: 'var(--text)'
                     }
                   }}
                 />

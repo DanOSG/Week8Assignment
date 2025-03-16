@@ -18,6 +18,7 @@
   line-height: 1.5 !important;
   color: var(--text) !important;
   background-color: transparent !important;
+  caret-color: var(--text) !important; /* Ensure cursor is visible */
 }
 
 .w-md-editor-text-pre {
@@ -47,6 +48,12 @@
 [data-theme="dark"] .w-md-editor-text-input,
 [data-theme="dark"] .w-md-editor-text-pre,
 [data-theme="dark"] .w-md-editor-text-pre > code {
+  color: #f1f5f9 !important;
+  caret-color: #f1f5f9 !important; /* Ensure cursor is visible in dark mode */
+}
+
+/* Force text color in dark mode */
+[data-theme="dark"] .w-md-editor textarea {
   color: #f1f5f9 !important;
 }
 
@@ -89,4 +96,19 @@ textarea {
 
 .wmde-markdown-color {
   color: var(--text) !important;
+}
+
+/* Force text visibility in dark mode */
+[data-theme="dark"] .w-md-editor-content {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .w-md-editor-input {
+  color: #f1f5f9 !important;
+}
+
+/* Fix for MDEditor in dark mode - additional specificity */
+[data-theme="dark"] .w-md-editor .w-md-editor-text-input {
+  color: #f1f5f9 !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
 } 

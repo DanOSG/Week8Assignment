@@ -191,6 +191,17 @@ select:focus {
 
 [data-theme="dark"] .w-md-editor-text-input {
   color: var(--text) !important;
+  -webkit-text-fill-color: var(--text) !important;
+}
+
+/* Fix for dark mode editor text */
+[data-theme="dark"] .w-md-editor .w-md-editor-text-input {
+  color: #f1f5f9 !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .w-md-editor textarea {
+  color: #f1f5f9 !important;
 }
 
 .edit-textarea {

@@ -4,6 +4,8 @@ import MDEditor from '@uiw/react-md-editor';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://week8assignment-wt6d.onrender.com';
+
 const CATEGORIES = [
   'Technology',
   'Lifestyle',
@@ -30,7 +32,7 @@ const PostForm = ({ token }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3001/api/posts', formData, {
+      await axios.post(`${API_URL}/api/posts`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       // Clear form after successful submission

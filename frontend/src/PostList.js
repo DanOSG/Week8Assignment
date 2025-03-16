@@ -9,7 +9,7 @@ import MDEditor from '@uiw/react-md-editor';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+const API_URL = process.env.REACT_APP_API_URL || 'https://week8assignment-wt6d.onrender.com';
 
 const CATEGORIES = [
   'Technology',

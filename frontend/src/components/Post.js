@@ -4,6 +4,8 @@ import Comments from './Comments';
 import jwt_decode from 'jwt-decode';
 import MDEditor from '@uiw/react-md-editor';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://week8assignment-wt6d.onrender.com';
+
 const Post = ({ post, onDelete, token, socket }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(post.content);
@@ -111,7 +113,7 @@ const Post = ({ post, onDelete, token, socket }) => {
 
   const fetchLikeStatus = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/posts/${post._id}/like`, {
+      const response = await fetch(`${API_URL}/api/posts/${post._id}/like`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -132,7 +134,7 @@ const Post = ({ post, onDelete, token, socket }) => {
 
   const handleLike = async (type) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/posts/${post._id}/like`, {
+      const response = await fetch(`${API_URL}/api/posts/${post._id}/like`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -151,7 +153,7 @@ const Post = ({ post, onDelete, token, socket }) => {
 
   const handleEdit = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/posts/${post._id}`, {
+      const response = await fetch(`${API_URL}/api/posts/${post._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

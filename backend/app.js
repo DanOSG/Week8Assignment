@@ -8,18 +8,24 @@ const authRoutes = require('./routes/authRoutes');
 const postRoutes = require('./routes/postRoutes');
 require('dotenv').config();
 
-console.log(process.env.DB_USER, process.env.DB_PASSWORD);
-
 const app = express();
 const server = http.createServer(app);
+
+// Configure CORS for both REST and Socket.IO
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://week8assignment-frontend.onrender.com', 'http://week8assignment-frontend.onrender.com'] 
+    : 'http://localhost:3000',
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
+
 const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST", "PUT", "DELETE"]
-  }
+  cors: corsOptions
 });
 
-app.use(cors());
 app.use(express.json());
 
 // Socket.io connection handling
@@ -46,17 +52,25 @@ app.use('/api/posts', postRoutes);
 const PORT = process.env.PORT || 3001;
 
 // Test database connection and sync models
-sequelize.authenticate()
-  .then(() => {
+const startServer = async () => {
+  try {
+    // Test the connection
+    await sequelize.authenticate();
     console.log('Database connection established successfully.');
-    return sequelize.sync({ alter: true }); // Use alter instead of force to preserve data
-  })
-  .then(() => {
+
+    // Sync the models
+    await sequelize.sync({ alter: true });
+    console.log('Database models synchronized.');
+
+    // Start the server
     server.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-    process.exit(1);
-  });
+  } catch (error) {
+    console.error('Unable to start the server:', error);
+    // Wait 5 seconds before exiting to allow logs to be captured
+    setTimeout(() => process.exit(1), 5000);
+  }
+};
+
+startServer();
